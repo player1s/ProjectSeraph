@@ -1,0 +1,14 @@
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\bin\Debug\netcoreapp2.1\ProjectSeraph.deps.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\bin\Debug\netcoreapp2.1\ProjectSeraph.runtimeconfig.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\bin\Debug\netcoreapp2.1\ProjectSeraph.runtimeconfig.dev.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\bin\Debug\netcoreapp2.1\ProjectSeraph.dll
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.csprojAssemblyReference.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.csproj.CoreCompileInputs.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.RazorAssemblyInfo.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.RazorAssemblyInfo.cs
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.AssemblyInfoInputs.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.AssemblyInfo.cs
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.RazorTargetAssemblyInfo.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.dll
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\obj\Debug\netcoreapp2.1\ProjectSeraph.pdb
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\bin\Debug\netcoreapp2.1\ProjectSeraph.pdb

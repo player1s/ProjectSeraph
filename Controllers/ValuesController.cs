@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace ProjectSeraph.Controllers
 {
     [Route("api/[controller]")]
@@ -14,7 +15,9 @@ namespace ProjectSeraph.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            Logic.Center center = new Logic.Center();
+            
+            return new string[] { center.core(), "value2" };
         }
 
         // GET api/values/5
