@@ -23,31 +23,9 @@ namespace ProjectSeraph.Logic
 
             System.Console.WriteLine("HAP: Start");
             var doc = new HtmlDocument();
-            doc.LoadHtml(@"<!DOCTYPE HTML PUBLIC ""-//IETF//DTD HTML//EN"">
-                    <HTML>
-                    <HEAD>
-                    <TITLE>FTP </TITLE>
-                    <BASE HREF="">
-                    </HEAD>
-                    <BODY>
-                    <H2>FTP Listing of </H2>
-                    <HR>
-                    <A HREF=""../"">Parent Directory</A><BR>
-                    <PRE class=""hello"">
-                    Jul 25 2014 08:47       254433 <div class=""heyo""><A HREF=""_UGV_UK_day_comparisons_new_ms_20140601-20140721.csvvvv"">_UGV_UK_day_comparisons_new_ms_20140601-20140721.csv</A></div>
-                    Sep 02 2014 15:04       225482 <A HREF=""CH_UGV_day_1_minute_20140901.zip"">CH_UGV_day_1_minute_20140901.zip</A>
-                    Sep 03 2014 15:03       213326 <A HREF=""CH_UGV_day_1_minute_20140902.zip"">CH_UGV_day_1_minute_20140902.zip</A>
-                    Sep 04 2014 15:05       207920 <A HREF=""CH_UGV_day_1_minute_20140903.zip"">CH_UGV_day_1_minute_20140903.zip</A>
+            doc.LoadHtml(responseString);
 
-                    </PRE>
-                    <PRE class=""hello"">
-                    Jul 25 2014 08:47       254433 <A HREF=""_UGV_UK_day_comparisons_new_ms_20140601-20140721.csv"">_UGV_UK_day_comparisons_new_ms_20140601-20140721.csv</A>
-                    </PRE>
-                    <HR>
-                    </BODY>
-                    </HTML>");
-
-                var pre = doc.DocumentNode.SelectNodes("//pre[contains(@class, 'hello')]//div[contains(@class, 'heyo')]");
+                var pre = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//div[contains(@class, 'clearfix listing-row project-list-item job-list-item ')]");
 
                 System.Console.WriteLine("HAP: precount {0}", pre.Count);
 
@@ -55,7 +33,7 @@ namespace ProjectSeraph.Logic
 
                 ArrayList hrefs = new ArrayList();
                 foreach(var node in links){
-                    hrefs.Add(node.GetAttributeValue("href", string.Empty));
+                    hrefs.Add(node.GetAttributeValue("title", string.Empty));
                 }
 
                 for (int i = 0; i < hrefs.Count; i++)
