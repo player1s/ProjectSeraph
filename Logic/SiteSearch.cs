@@ -43,15 +43,14 @@ namespace ProjectSeraph.Logic
                     Sep 04 2014 15:05       207920 <A HREF=""CH_UGV_day_1_minute_20140903.zip"">CH_UGV_day_1_minute_20140903.zip</A>
 
                     </PRE>
-                    <PRE>
+                    <PRE class=""hello"">
                     Jul 25 2014 08:47       254433 <A HREF=""_UGV_UK_day_comparisons_new_ms_20140601-20140721.csv"">_UGV_UK_day_comparisons_new_ms_20140601-20140721.csv</A>
                     </PRE>
                     <HR>
                     </BODY>
                     </HTML>");
 
-                //var pre = doc.DocumentNode.SelectNodes("//div[contains(@class, 'hello')]");
-                var pre = doc.DocumentNode.Descendants("pre").FirstOrDefault();
+                var pre = doc.DocumentNode.SelectNodes("//pre[contains(@class, 'hello')]");
                 var links = pre.Descendants("a");
                 ArrayList hrefs = new ArrayList();
                 foreach(var node in links){
