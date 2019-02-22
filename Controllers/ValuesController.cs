@@ -16,8 +16,12 @@ namespace ProjectSeraph.Controllers
         public ActionResult<IEnumerable<string>> Get()
         {
             Logic.Center center = new Logic.Center();
-            
-            return new string[] { center.core(), "value2" };
+
+            var shown = center.core();
+
+             System.Console.WriteLine("ValuesController: Over");
+      
+            return new string[] { "shown", "value2" };
         }
 
         // GET api/values/5

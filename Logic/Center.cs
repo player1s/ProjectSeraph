@@ -1,5 +1,5 @@
 using System;
-
+using System.Threading.Tasks;
 
 namespace ProjectSeraph.Logic
 {
@@ -7,16 +7,16 @@ namespace ProjectSeraph.Logic
     {
         public Center()
         {}
-        public String core()
+        public async Task<string> core()
         {
             System.Console.WriteLine("Center: Start");
 
-            String toReturn;
+            String toReturn = "pph";
 
             SiteSearch siteSearch = new SiteSearch();
-            toReturn = siteSearch.pph();
-
-            System.Console.WriteLine("Center: Returns: {0}", toReturn);
+            await siteSearch.pph();
+            //toReturn = siteSearch.responseString;
+            System.Console.WriteLine("Center: Returns: pph");
             return toReturn;
         }
 
