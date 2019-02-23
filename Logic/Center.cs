@@ -20,7 +20,7 @@ namespace ProjectSeraph.Logic
 
             List<Job> jobList = new List<Job>();
 
-            await siteSearch.pph(jobList);
+            await siteSearch.pph();
             //toReturn = siteSearch.responseString;
             System.Console.WriteLine("Center: Returns: pph");
             return toReturn;

@@ -7,7 +7,7 @@ namespace ProjectSeraph.model
         {}
         public string Title { get; set; }
         public string URL { get; set; }
-        public string time { get; set; }
-        public string salary { get; set; }
+        public string Time { get; set; }
+        public string Salary { get; set; }
     }
 }

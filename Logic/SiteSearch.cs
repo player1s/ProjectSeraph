@@ -9,7 +9,6 @@ namespace ProjectSeraph.Logic
 {
     class SiteSearch
     {
-        Job job = new Job();
         HttpClient httpClient = new HttpClient();
         HttpResponseMessage site;
         HtmlNodeCollection preLinks;
@@ -18,12 +17,14 @@ namespace ProjectSeraph.Logic
         IEnumerable<HtmlAgilityPack.HtmlNode> links;
         IEnumerable<HtmlAgilityPack.HtmlNode> time;
         string siteString;
-        int counterInForeach = 0;
+        List<string> titles = new List<string>();
+        List<string> urls = new List<string>();
+        List<Job> pphJobs = new List<Job>();
 
         public SiteSearch()
         {}
 
-        public async Task<string> pph(List<Job> pphJobList)
+        public async Task<string> pph()
         {
 
             System.Console.WriteLine("Class SiteSearch: Start");
@@ -43,30 +44,19 @@ namespace ProjectSeraph.Logic
             time = preTime.Descendants("time");
 
             foreach(var node in links){
+                
+                Job job = new Job();
 
                 job.Title = node.GetAttributeValue("title", string.Empty);
                 job.URL = node.GetAttributeValue("href", string.Empty);
 
-                pphJobList.Add(job);
-                System.Console.WriteLine("Added: {0}", job.URL);
+                pphJobs.Add(job);
             }
 
-            foreach(var node in time){
-                
-                
-                job.time = node.InnerText;
-
-                pphJobList[counterInForeach].time = job.time;
-                counterInForeach++;
-            }
-            counterInForeach = 0;
-
-            for (int i = 0; i < pphJobList.Count; i++)
-            {
-                System.Console.WriteLine("HAP: Job: title: {0} \n URL: {1} \n time: {2} ",
-                pphJobList[i].Title, pphJobList[i].URL, pphJobList[i].time);
-            }
-                
+           for (int i = 0; i < pphJobs.Count; i++)
+           {
+                System.Console.WriteLine("HAP: in List : title: {0}",pphJobs[i].Title);
+           }     
 
             System.Console.WriteLine("HAP: Finish");
             System.Console.WriteLine("Class SiteSearch: return: site");
