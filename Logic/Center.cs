@@ -1,5 +1,8 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using ProjectSeraph.model;
 
 namespace ProjectSeraph.Logic
 {
@@ -14,7 +17,10 @@ namespace ProjectSeraph.Logic
             String toReturn = "pph";
 
             SiteSearch siteSearch = new SiteSearch();
-            await siteSearch.pph();
+
+            List<Job> jobList = new List<Job>();
+
+            await siteSearch.pph(jobList);
             //toReturn = siteSearch.responseString;
             System.Console.WriteLine("Center: Returns: pph");
             return toReturn;
