@@ -9,16 +9,6 @@ namespace ProjectSeraph.Logic
     class SiteSearch
     {
 
-
-
-        public SiteSearch()
-        {}
-
-        //public string responseString { get; set; }
-
-        public async Task<string> pph()
-        {
-
         HttpClient httpClient = new HttpClient();
         HttpResponseMessage site;
         HtmlNodeCollection pre;
@@ -26,6 +16,12 @@ namespace ProjectSeraph.Logic
         IEnumerable<HtmlAgilityPack.HtmlNode> links;
         ArrayList hrefs = new ArrayList();
         string siteString;
+
+        public SiteSearch()
+        {}
+
+        public async Task<string> pph()
+        {
 
             System.Console.WriteLine("Class SiteSearch: Start");
 
