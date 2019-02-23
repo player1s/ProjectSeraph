@@ -11,17 +11,19 @@ namespace ProjectSeraph.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        Logic.Center center = new Logic.Center();
+        string toReturn = "";
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            Logic.Center center = new Logic.Center();
+            System.Console.WriteLine("ValuesController: Begin");
+            
+            toReturn = center.core().ToString();
 
-            var shown = center.core();
-
-             System.Console.WriteLine("ValuesController: Over");
+            System.Console.WriteLine("ValuesController: Over");
       
-            return new string[] { "shown", "value2" };
+            return new string[] { toReturn, " \nvalue2" };
         }
 
         // GET api/values/5

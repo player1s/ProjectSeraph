@@ -10,18 +10,24 @@ namespace ProjectSeraph.Logic
     {
         List<Job> jobs = new List<Job>();
         SiteSearch siteSearch = new SiteSearch();
+        string toReturn = "";
 
         public Center()
         {}
-        public async Task<List<Job>> core()
+        public async Task<string> core()
         {
             System.Console.WriteLine("Center: Start");
 
             jobs.AddRange(await siteSearch.pph());
 
+            for (int i = 0; i < jobs.Count; i++)
+            {
+                toReturn += "Title: " + jobs[i].Title + "URL: " + jobs[i].URL + "Time: " + jobs[i].Time + "Proposals: " + jobs[i].ProposalNum;
+            }
+
             System.Console.WriteLine("Center: Returns: pph");
 
-            return jobs;
+            return toReturn;
         }
 
     }
