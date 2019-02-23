@@ -8,22 +8,20 @@ namespace ProjectSeraph.Logic
 {
     class Center
     {
+        List<Job> jobs = new List<Job>();
+        SiteSearch siteSearch = new SiteSearch();
+
         public Center()
         {}
-        public async Task<string> core()
+        public async Task<List<Job>> core()
         {
             System.Console.WriteLine("Center: Start");
 
-            String toReturn = "pph";
+            jobs.AddRange(await siteSearch.pph());
 
-            SiteSearch siteSearch = new SiteSearch();
-
-            List<Job> jobList = new List<Job>();
-
-            await siteSearch.pph();
-            //toReturn = siteSearch.responseString;
             System.Console.WriteLine("Center: Returns: pph");
-            return toReturn;
+
+            return jobs;
         }
 
     }

@@ -9,5 +9,6 @@ namespace ProjectSeraph.model
         public string URL { get; set; }
         public string Time { get; set; }
         public string Salary { get; set; }
+        public string ProposalNum { get; set; }
     }
 }
