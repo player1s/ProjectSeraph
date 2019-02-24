@@ -24,7 +24,8 @@ namespace ProjectSeraph.Logic
            for (int i = 0; i < jobs.Count; i++)
             {
                 toReturn += "\n Title: " + jobs[i].Title + "\n URL: " + jobs[i].URL + "\n Time: "
-                 + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n Price: " + jobs[i].Salary + "\n";
+                 + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n Price: " + jobs[i].Salary + "\n"
+                 + "\n isFixed: " + jobs[i].isFixedSalary + "\n";
             } 
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);

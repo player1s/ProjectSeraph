@@ -20,14 +20,15 @@ namespace ProjectSeraph.Logic
         IEnumerable<HtmlAgilityPack.HtmlNode> time;
         IEnumerable<HtmlAgilityPack.HtmlNode> proposals;
         IEnumerable<HtmlAgilityPack.HtmlNode> price;
+        IEnumerable<HtmlAgilityPack.HtmlNode> isFixedSalary;
         string siteString;
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
         List<string> timeList = new List<string>();
-        List<string> proposalList = new List<string>();
+        string[] proposalList = new string[30];
+        //List<string> proposalList = new List<string>();
         List<string> priceList = new List<string>();
-        string toReturn = "";
-
+        List<string> isFixedSalaryList = new List<string>();
         public SiteSearch()
         {}
 
@@ -54,6 +55,13 @@ namespace ProjectSeraph.Logic
             time = preTime.Descendants("time");
             proposals = preProposalCount.Nodes();
             price = prePriceTag.Descendants("span");
+            isFixedSalary = prePriceTag.Descendants("small");
+
+            foreach(var node in isFixedSalary){
+
+                isFixedSalaryList.Add(node.InnerText);
+                System.Console.WriteLine("isFixedSalaryList added this: {0}", node.InnerText);
+            }
 
             //querying elements that are located in different nodes
             foreach(var node in price){
@@ -65,9 +73,11 @@ namespace ProjectSeraph.Logic
             //querying elements that are located in different nodes
             foreach(var node in proposals){
 
-                proposalList.Add(node.InnerText);
+                proposalList[foreachInteration] = node.InnerText;
                 System.Console.WriteLine("proposallist added this: {0}", node.InnerText);
+                foreachInteration++;
             }
+            foreachInteration = 0;
             //querying elements that are located in different nodes
             foreach(var node in time){
 
@@ -83,6 +93,7 @@ namespace ProjectSeraph.Logic
                 job.Time = timeList[foreachInteration];
                 job.ProposalNum = proposalList[foreachInteration];
                 job.Salary = priceList[foreachInteration];
+                job.isFixedSalary = isFixedSalaryList[foreachInteration];
 
                 pphJobs.Add(job);
                 foreachInteration++;
@@ -91,8 +102,8 @@ namespace ProjectSeraph.Logic
             //check if the received data are adequate
            for (int i = 0; i < pphJobs.Count; i++)
            {
-                System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1} \n Time: {2} \n Proposals: {3} \n Price: {4}\n"
-                ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum, pphJobs[i].Salary);
+                System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1} \n Time: {2} \n Proposals: {3} \n Price: {4}\n isFixed: {5}\n"
+                ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum, pphJobs[i].Salary, pphJobs[i].isFixedSalary);
            }    
 
             System.Console.WriteLine("HAP: Finish");
