@@ -25,7 +25,7 @@ namespace ProjectSeraph.Logic
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
         List<string> timeList = new List<string>();
-        string[] proposalList = new string[30];
+        string[] proposalList = new string[120];
         //List<string> proposalList = new List<string>();
         List<string> priceList = new List<string>();
         List<string> isFixedSalaryList = new List<string>();
