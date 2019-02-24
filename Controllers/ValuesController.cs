@@ -19,7 +19,7 @@ namespace ProjectSeraph.Controllers
         {
             System.Console.WriteLine("ValuesController: Begin");
             
-            toReturn = center.core().ToString();
+            toReturn = center.core();
 
             System.Console.WriteLine("ValuesController: Over");
       

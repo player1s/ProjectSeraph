@@ -14,18 +14,19 @@ namespace ProjectSeraph.Logic
 
         public Center()
         {}
-        public async Task<string> core()
+        public string core()
         {
             System.Console.WriteLine("Center: Start");
 
-            jobs.AddRange(await siteSearch.pph());
+            jobs.AddRange(siteSearch.pph().Result);
 
-            for (int i = 0; i < jobs.Count; i++)
+            //prepare the whole array into a string to return.
+           for (int i = 0; i < jobs.Count; i++)
             {
-                toReturn += "Title: " + jobs[i].Title + "URL: " + jobs[i].URL + "Time: " + jobs[i].Time + "Proposals: " + jobs[i].ProposalNum;
-            }
+                toReturn += "\n Title: " + jobs[i].Title + "\n URL: " + jobs[i].URL + "\n Time: " + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n";
+            } 
 
-            System.Console.WriteLine("Center: Returns: pph");
+            System.Console.WriteLine("Center: Returns: {0}", toReturn);
 
             return toReturn;
         }

@@ -23,6 +23,7 @@ namespace ProjectSeraph.Logic
         List<Job> pphJobs = new List<Job>();
         List<string> times = new List<string>();
         List<string> proposalList = new List<string>();
+        string toReturn = "";
 
         public SiteSearch()
         {}
@@ -79,7 +80,7 @@ namespace ProjectSeraph.Logic
            {
                 System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1}  Time: {2}  Proposals: {3}"
                 ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum);
-           }     
+           }    
 
             System.Console.WriteLine("HAP: Finish");
             System.Console.WriteLine("Class SiteSearch: return: site");
