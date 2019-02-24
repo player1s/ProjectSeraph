@@ -14,15 +14,18 @@ namespace ProjectSeraph.Logic
         HtmlNodeCollection preLinks;
         HtmlNodeCollection preTime;
         HtmlNodeCollection preProposalCount;
+        HtmlNodeCollection prePriceTag;
         HtmlDocument doc = new HtmlDocument();
         IEnumerable<HtmlAgilityPack.HtmlNode> links;
         IEnumerable<HtmlAgilityPack.HtmlNode> time;
         IEnumerable<HtmlAgilityPack.HtmlNode> proposals;
+        IEnumerable<HtmlAgilityPack.HtmlNode> price;
         string siteString;
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
-        List<string> times = new List<string>();
+        List<string> timeList = new List<string>();
         List<string> proposalList = new List<string>();
+        List<string> priceList = new List<string>();
         string toReturn = "";
 
         public SiteSearch()
@@ -43,12 +46,21 @@ namespace ProjectSeraph.Logic
             preLinks = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//h6[contains(@class, 'title')]");
             preTime = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//ul[contains(@class, 'clearfix member-info horizontal crop hidden-xs')]");
             preProposalCount = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//span[contains(@class, 'value proposal-count')]");
+            prePriceTag = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//div[contains(@class, 'price-tag')]");
 
             System.Console.WriteLine("HAP: precount {0}", preLinks.Count);
             //select tags on which specific queries will be run
             links = preLinks.Descendants("a");
             time = preTime.Descendants("time");
             proposals = preProposalCount.Nodes();
+            price = prePriceTag.Descendants("span");
+
+            //querying elements that are located in different nodes
+            foreach(var node in price){
+
+                priceList.Add(node.InnerText);
+                System.Console.WriteLine("priceList added this: {0}", node.InnerText);
+            }
 
             //querying elements that are located in different nodes
             foreach(var node in proposals){
@@ -59,17 +71,18 @@ namespace ProjectSeraph.Logic
             //querying elements that are located in different nodes
             foreach(var node in time){
 
-                times.Add(node.InnerText);
+                timeList.Add(node.InnerText);
             }
             // "Main" foreach where all the data are collected int a job object, then written to a List<Job>
             foreach(var node in links){
                 
                 Job job = new Job();
-
+                System.Console.WriteLine("foreach: {0}", foreachInteration);
                 job.Title = node.GetAttributeValue("title", string.Empty);
                 job.URL = node.GetAttributeValue("href", string.Empty);
-                job.Time = times[foreachInteration];
+                job.Time = timeList[foreachInteration];
                 job.ProposalNum = proposalList[foreachInteration];
+                job.Salary = priceList[foreachInteration];
 
                 pphJobs.Add(job);
                 foreachInteration++;
@@ -78,8 +91,8 @@ namespace ProjectSeraph.Logic
             //check if the received data are adequate
            for (int i = 0; i < pphJobs.Count; i++)
            {
-                System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1}  Time: {2}  Proposals: {3}"
-                ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum);
+                System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1} \n Time: {2} \n Proposals: {3} \n Price: {4}\n"
+                ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum, pphJobs[i].Salary);
            }    
 
             System.Console.WriteLine("HAP: Finish");

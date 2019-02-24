@@ -23,7 +23,8 @@ namespace ProjectSeraph.Logic
             //prepare the whole array into a string to return.
            for (int i = 0; i < jobs.Count; i++)
             {
-                toReturn += "\n Title: " + jobs[i].Title + "\n URL: " + jobs[i].URL + "\n Time: " + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n";
+                toReturn += "\n Title: " + jobs[i].Title + "\n URL: " + jobs[i].URL + "\n Time: "
+                 + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n Price: " + jobs[i].Salary + "\n";
             } 
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);
