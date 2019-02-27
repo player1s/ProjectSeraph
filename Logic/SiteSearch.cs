@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
 using ProjectSeraph.model;
+using System;
 
 namespace ProjectSeraph.Logic
 {
@@ -24,14 +25,17 @@ namespace ProjectSeraph.Logic
         string siteString;
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
-        List<string> timeList = new List<string>();
+        List<DateTime> timeList = new List<DateTime>();
         string[] proposalList = new string[120];
         //List<string> proposalList = new List<string>();
         List<string> priceList = new List<string>();
         List<string> isFixedSalaryList = new List<string>();
+        System.DateTime moment = new System.DateTime();
+        
         public SiteSearch()
         {}
 
+        //Query website peopleperhour
         public async Task<List<Job>> pph()
         {
 
@@ -77,11 +81,15 @@ namespace ProjectSeraph.Logic
                 System.Console.WriteLine("proposallist added this: {0}", node.InnerText);
                 foreachInteration++;
             }
+
             foreachInteration = 0;
+
             //querying elements that are located in different nodes
             foreach(var node in time){
 
-                timeList.Add(node.InnerText);
+                DateTime timePosted = Convert.ToDateTime(node.GetAttributeValue("datetime", string.Empty));
+
+                timeList.Add(timePosted);
             }
             // "Main" foreach where all the data are collected int a job object, then written to a List<Job>
             foreach(var node in links){
@@ -95,6 +103,7 @@ namespace ProjectSeraph.Logic
                 job.Salary = priceList[foreachInteration];
                 job.isFixedSalary = isFixedSalaryList[foreachInteration];
 
+                
                 pphJobs.Add(job);
                 foreachInteration++;
             }
