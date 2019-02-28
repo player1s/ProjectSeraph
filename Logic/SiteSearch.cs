@@ -27,10 +27,10 @@ namespace ProjectSeraph.Logic
         List<Job> pphJobs = new List<Job>();
         List<DateTime> timeList = new List<DateTime>();
         string[] proposalList = new string[120];
-        //List<string> proposalList = new List<string>();
         List<string> priceList = new List<string>();
         List<string> isFixedSalaryList = new List<string>();
-        System.DateTime moment = new System.DateTime();
+        // filtertime set to half hrs
+        System.TimeSpan filterTime = new System.TimeSpan(0, 0, -30, 0);
         
         public SiteSearch()
         {}
@@ -41,6 +41,7 @@ namespace ProjectSeraph.Logic
 
             System.Console.WriteLine("Class SiteSearch: Start");
 
+            // the site to check on
             site = await httpClient.GetAsync("https://www.peopleperhour.com/freelance-jobs");
             siteString = await site.Content.ReadAsStringAsync();
 
@@ -81,7 +82,7 @@ namespace ProjectSeraph.Logic
                 System.Console.WriteLine("proposallist added this: {0}", node.InnerText);
                 foreachInteration++;
             }
-
+            // reset foreachIteration for later use
             foreachInteration = 0;
 
             //querying elements that are located in different nodes
@@ -91,7 +92,7 @@ namespace ProjectSeraph.Logic
 
                 timeList.Add(timePosted);
             }
-            // "Main" foreach where all the data are collected int a job object, then written to a List<Job>
+            // "Main" foreach where all the data are collected into a job object, then written to a List<Job>
             foreach(var node in links){
                 
                 Job job = new Job();
@@ -103,17 +104,14 @@ namespace ProjectSeraph.Logic
                 job.Salary = priceList[foreachInteration];
                 job.isFixedSalary = isFixedSalaryList[foreachInteration];
 
-                
+                //Check that the jobs were posted within a specified timeframe from now.
+                if(job.Time > DateTime.Now.Add(filterTime))
+                {
                 pphJobs.Add(job);
+                }
                 foreachInteration++;
             }
             foreachInteration = 0;
-            //check if the received data are adequate
-           for (int i = 0; i < pphJobs.Count; i++)
-           {
-                System.Console.WriteLine("HAP: in List : title: {0} \n URL: {1} \n Time: {2} \n Proposals: {3} \n Price: {4}\n isFixed: {5}\n"
-                ,pphJobs[i].Title, pphJobs[i].URL, pphJobs[i].Time, pphJobs[i].ProposalNum, pphJobs[i].Salary, pphJobs[i].isFixedSalary);
-           }    
 
             System.Console.WriteLine("HAP: Finish");
             System.Console.WriteLine("Class SiteSearch: return: site");
