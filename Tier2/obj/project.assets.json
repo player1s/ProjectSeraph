@@ -11589,11 +11589,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\ProjectSeraph.csproj",
+      "projectUniqueName": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\Tier2\\ProjectSeraph.csproj",
       "projectName": "ProjectSeraph",
-      "projectPath": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\ProjectSeraph.csproj",
+      "projectPath": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\Tier2\\ProjectSeraph.csproj",
       "packagesPath": "C:\\Users\\Levente\\.nuget\\packages\\",
-      "outputPath": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\obj\\",
+      "outputPath": "C:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\Tier2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
