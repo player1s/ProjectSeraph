@@ -1,21 +1,21 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-
-namespace ProjectSeraph.Controllers
+namespace Tier2.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ValuesController : ControllerBase
     {
         Logic.Center center = new Logic.Center();
-        string toReturn = "";
+        String toReturn;
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public string Get()
         {
             System.Console.WriteLine("ValuesController: Begin");
             
@@ -23,7 +23,7 @@ namespace ProjectSeraph.Controllers
 
             System.Console.WriteLine("ValuesController: Over");
       
-            return new string[] { toReturn, " \nvalue2" };
+            return toReturn;
         }
 
         // GET api/values/5

@@ -1,7 +1,7 @@
 
 using System;
 
-namespace ProjectSeraph.model
+namespace Tier2.model
 {
     class Job
     {

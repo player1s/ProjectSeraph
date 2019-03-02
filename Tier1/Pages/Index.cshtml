@@ -8,7 +8,7 @@
     </p>
 
     @for(var i = 0; i < Model.Jobs.Count; i++)
-        {<p>Line @Model.Jobs[i]</p>}
+        {<p> @Model.Jobs[i].Title <br> @Model.Jobs[i].URL <br> @Model.Jobs[i].Time <br> Salary: @Model.Jobs[i].Salary <br> Proposals: @Model.Jobs[i].ProposalNum <br> PaymentType: @Model.Jobs[i].isFixedSalary <br><br></p>}
 
 </body>
 </html>

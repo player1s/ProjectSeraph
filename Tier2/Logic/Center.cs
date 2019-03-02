@@ -2,31 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ProjectSeraph.model;
+using Tier2.model;
 
-namespace ProjectSeraph.Logic
+namespace Tier2.Logic
 {
     class Center
     {
-        List<Job> jobs = new List<Job>();
+        public List<Job> jobs = new List<Job>();
         SiteSearch siteSearch = new SiteSearch();
+        JsonHandler jsonHandler = new JsonHandler();
         string toReturn = "";
 
         public Center()
         {}
-        public string core()
+        public String core()
         {
             System.Console.WriteLine("Center: Start");
 
             jobs.AddRange(siteSearch.pph().Result);
 
-            //prepare the whole array into a string to return.
-           for (int i = 0; i < jobs.Count; i++)
-            {
-                toReturn += "\n Title: " + jobs[i].Title + "\n URL: " + jobs[i].URL + "\n Time: "
-                 + jobs[i].Time + "\n Proposals: " + jobs[i].ProposalNum + "\n Price: " + jobs[i].Salary + "\n"
-                 + "\n isFixed: " + jobs[i].isFixedSalary + "\n";
-            } 
+            toReturn = jsonHandler.SerializeRange(jobs);
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);
 

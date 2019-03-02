@@ -3,10 +3,10 @@ using System.Collections;
 using System.Net.Http;
 using System.Threading.Tasks;
 using HtmlAgilityPack;
-using ProjectSeraph.model;
+using Tier2.model;
 using System;
 
-namespace ProjectSeraph.Logic
+namespace Tier2.Logic
 {
     class SiteSearch
     {
@@ -30,7 +30,7 @@ namespace ProjectSeraph.Logic
         List<string> priceList = new List<string>();
         List<string> isFixedSalaryList = new List<string>();
         // filtertime set to half hrs
-        System.TimeSpan filterTime = new System.TimeSpan(0, 0, -30, 0);
+        System.TimeSpan filterTime = new System.TimeSpan(-20, 0, -30, 0);
         
         public SiteSearch()
         {}
