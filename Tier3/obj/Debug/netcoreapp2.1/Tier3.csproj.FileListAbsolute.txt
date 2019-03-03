@@ -1,0 +1,14 @@
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\bin\Debug\netcoreapp2.1\Tier3.deps.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\bin\Debug\netcoreapp2.1\Tier3.runtimeconfig.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\bin\Debug\netcoreapp2.1\Tier3.runtimeconfig.dev.json
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\bin\Debug\netcoreapp2.1\Tier3.dll
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\bin\Debug\netcoreapp2.1\Tier3.pdb
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.csprojAssemblyReference.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.csproj.CoreCompileInputs.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.RazorAssemblyInfo.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.RazorAssemblyInfo.cs
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.AssemblyInfoInputs.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.AssemblyInfo.cs
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.RazorTargetAssemblyInfo.cache
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.dll
+C:\mindenJoSHasztalan\SecondSun\Legacy\Projects\ProjectSeraph\Tier3\obj\Debug\netcoreapp2.1\Tier3.pdb
