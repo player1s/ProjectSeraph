@@ -21,9 +21,10 @@ namespace Tier2.Logic
             System.Console.WriteLine("Center: Start");
 
             jobs.AddRange(siteSearch.pph().Result);
-            t2Client.PostData(jobs).ConfigureAwait(false);
-
+            
             toReturn = jsonHandler.SerializeRange(jobs);
+
+            t2Client.PostData();
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);
 

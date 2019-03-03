@@ -9,6 +9,8 @@ namespace Tier3
         public static void Main()
         {
             DataHandler dataHandler = new DataHandler();
+            Receiver rec = new Receiver();
+            rec.StartServer();
 
             System.Console.WriteLine( dataHandler.GetAllJobs());
         }
