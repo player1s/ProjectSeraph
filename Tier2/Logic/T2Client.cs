@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Tier2.model;
+using Newtonsoft.Json;
 
 namespace Tier2.Logic
 {
@@ -10,23 +11,20 @@ namespace Tier2.Logic
         string responseInString;
         List<Job> deSerialized;
         string url;
-        //JsonHandler jsonHandler = new JsonHandler();
+        JsonHandler jsonHandler = new JsonHandler();
         public T2Client() 
-        {}
-        public async void GetData()
+        {}    
+            public async Task<string> PostData(List<Job> obj)
         {
-            
-            url = "https://localhost:5005/api/values/";
+            string responseInString;
+            string json = JsonConvert.SerializeObject(obj);
+            string url = "https://localhost:5005/api/values/";
             HttpClient client = new HttpClient();
-            var result = await client.GetAsync(url).ConfigureAwait(false);
+            var result = await client.PostAsJsonAsync(url, json).ConfigureAwait(false);
 
             responseInString = await result.Content.ReadAsStringAsync();
 
-            System.Console.WriteLine(responseInString);
-
-            //deSerialized = jsonHandler.DeSerializeToRange(responseInString);
-
-            //return deSerialized;
+            return responseInString;
         }
     }
 }

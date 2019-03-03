@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Tier3.Logic;
 
 namespace Tier3.Controllers
 {
@@ -10,11 +11,11 @@ namespace Tier3.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        Core core = new Core();
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            System.Console.WriteLine("start");
             return new string[] { "value1", "value2" };
         }
 
@@ -27,8 +28,12 @@ namespace Tier3.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] string json)
         {
+        System.Console.WriteLine("got: {json}");
+        
+        core.Base(json);
+
         }
 
         // PUT api/values/5

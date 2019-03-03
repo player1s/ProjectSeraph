@@ -22,7 +22,6 @@ namespace Tier2.Controllers
             System.Console.WriteLine("ValuesController: Begin");
             
             toReturn = center.core();
-            t2Client.GetData();
 
             System.Console.WriteLine("ValuesController: Over");
       
