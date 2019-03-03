@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace Tier3.Model
 {
-    public class BloggingContext : DbContext
+    public class EFBase : DbContext
     {
-        public DbSet<Job> Job { get; set; }
+        public DbSet<Job> Jobs { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
+            optionsBuilder.UseSqlite("Data Source=Jobs.db");
         }
     }
 }

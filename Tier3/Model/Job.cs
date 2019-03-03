@@ -2,10 +2,11 @@ using System;
 
 namespace Tier3.Model
 {
-    class Job
+    public class Job
     {
         public Job()
         {}
+        public int Id { get; set; }
         public string Title { get; set; }
         public string URL { get; set; }
         public DateTime Time { get; set; }
