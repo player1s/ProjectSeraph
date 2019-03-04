@@ -18,7 +18,7 @@ namespace Tier2.Logic
         JsonHandler jsonHandler = new JsonHandler();
         public T2Client() 
         {}    
-        public void PostData()  
+        public void PostData(string json)  
     {  
         byte[] bytes = new byte[1024];  
   
@@ -46,7 +46,7 @@ namespace Tier2.Logic
                     sender.RemoteEndPoint.ToString());  
   
                 // Encode the data string into a byte array.    
-                byte[] msg = Encoding.ASCII.GetBytes("This is a test<EOF>");  
+                byte[] msg = Encoding.ASCII.GetBytes(json);  
   
                 // Send the data through the socket.    
                 int bytesSent = sender.Send(msg);  

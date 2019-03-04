@@ -7,7 +7,7 @@ namespace Tier3.Logic
 {
     public class DataHandler 
     {
-        List<Job> jobList = new List<Job>();   
+        List<Job> jobList = new List<Job>();
 
         public DataHandler(){}        
 
@@ -25,7 +25,6 @@ namespace Tier3.Logic
                     TempJob.Salary = melo.Salary;
                     TempJob.Time = melo.Time;
                     TempJob.isFixedSalary = melo.isFixedSalary;
-                    Console.WriteLine(" - {0}", melo.Id);
                 }
             }
             return jobList;            
@@ -33,8 +32,11 @@ namespace Tier3.Logic
 
         public string WriteData(List<Job> range)
         {
-             using (var db = new EFBase())
+            
+
+            using (var db = new EFBase())
             {
+                
                 for (int i = 0; i < range.Count; i++)
                 {
                     Job TempJob = new Job();
@@ -54,13 +56,29 @@ namespace Tier3.Logic
 
                 Console.WriteLine();
                 Console.WriteLine("All Jobs in database:");
-                foreach (var melo in db.Jobs)
-                {
-                    Console.WriteLine(" - {0}", melo.Id);
-                }
+                
             }
 
             return "Added to db: ";
+        }
+
+        public void peek()
+        {
+            using (var db = new EFBase())
+            {
+                foreach (var melo in db.Jobs)
+                {
+                System.Console.WriteLine("Id: " +                   
+                    melo.Id+ " \nTitle: " +
+                    melo.Title+ " \nURL: " +
+                    melo.URL+ " \nProposalnum: " +
+                    melo.ProposalNum+ " \nSalary: " +
+                    melo.Salary+ " \nTime: " +
+                    melo.Time+ " \nisFixedSalary: " +
+                    melo.isFixedSalary + " \n\n " 
+                );
+                }
+            }
         }
     }
 }

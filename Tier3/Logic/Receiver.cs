@@ -7,7 +7,8 @@ namespace Tier3
 {
     public class Receiver
     {
-        string msg = "whatnot";
+        string data = null;  
+
         public Receiver()
         {
 
@@ -37,24 +38,16 @@ namespace Tier3
             Socket handler = listener.Accept();  
   
              // Incoming data from the client.    
-             string data = null;  
              byte[] bytes = null;  
   
-            while (true)  
-            {  
-                bytes = new byte[1024];  
+              
+              
+                bytes = new byte[102400];  
                 int bytesRec = handler.Receive(bytes);  
                 data += Encoding.ASCII.GetString(bytes, 0, bytesRec);  
-                if (data.IndexOf("<EOF>") > -1)  
-                {  
-                    break;  
-                }  
-            }  
+                                  
+            
   
-            Console.WriteLine("Text received : {0}", data);  
-  
-            byte[] msg = Encoding.ASCII.GetBytes(data);  
-            handler.Send(msg);  
             handler.Shutdown(SocketShutdown.Both);  
             handler.Close(); 
 
@@ -64,7 +57,7 @@ namespace Tier3
             Console.WriteLine(e.ToString());  
         }  
   
-            return msg;             
+            return data;             
         }          
     }  
 }

@@ -24,7 +24,7 @@ namespace Tier2.Logic
             
             toReturn = jsonHandler.SerializeRange(jobs);
 
-            t2Client.PostData();
+            t2Client.PostData(toReturn);
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);
 
