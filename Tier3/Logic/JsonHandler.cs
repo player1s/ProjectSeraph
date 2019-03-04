@@ -13,7 +13,6 @@ namespace Tier3.Logic
 
         public String SerializeRange(List<Job> range)
         {
-
             n = JsonConvert.SerializeObject(range);
 
             System.Console.WriteLine("Serialized");
@@ -23,7 +22,6 @@ namespace Tier3.Logic
 
         public List<Job> DeSerializeToRange(string range)
         {
-
             jobList = JsonConvert.DeserializeObject<List<Job>>(range);
 
             System.Console.WriteLine("Serialized");

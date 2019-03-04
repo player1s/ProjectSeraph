@@ -9,7 +9,6 @@ namespace Tier2.Logic
     {
         String n = "";
         public JsonHandler(){}
-
         public String SerializeRange(List<Job> range)
         {
 
