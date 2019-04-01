@@ -23,6 +23,7 @@ namespace Tier2.Logic
         IEnumerable<HtmlAgilityPack.HtmlNode> price;
         IEnumerable<HtmlAgilityPack.HtmlNode> isFixedSalary;
         string siteString;
+        string defaultValue = "Not set";
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
         List<DateTime> timeList = new List<DateTime>();
@@ -31,6 +32,9 @@ namespace Tier2.Logic
         List<string> isFixedSalaryList = new List<string>();
         // filtertime set to half hrs
         System.TimeSpan filterTime = new System.TimeSpan(-20, 0, -30, 0);
+        //correction of timezones
+        System.TimeSpan workanaTimezoneCorrection = new System.TimeSpan(0, 6, 0, 0);
+
         
         public SiteSearch()
         {}
@@ -41,13 +45,18 @@ namespace Tier2.Logic
 
             System.Console.WriteLine("Class SiteSearch: Start");
 
+            //phase 1: connect to site
             // the site to check on
             site = await httpClient.GetAsync("https://www.peopleperhour.com/freelance-jobs");
+
+            //phase 2: load the site
             siteString = await site.Content.ReadAsStringAsync();
 
             System.Console.WriteLine("HAP: Start");
 
             doc.LoadHtml(siteString);
+
+            //phase 3: look for specific nodes
             //Select nodes of different locations. Needed information are separated
             preLinks = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//h6[contains(@class, 'title')]");
             preTime = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//ul[contains(@class, 'clearfix member-info horizontal crop hidden-xs')]");
@@ -55,6 +64,8 @@ namespace Tier2.Logic
             prePriceTag = doc.DocumentNode.SelectNodes("//div[contains(@class, 'main-content full-width')]//div[contains(@class, 'price-tag')]");
 
             System.Console.WriteLine("HAP: precount {0}", preLinks.Count);
+
+            //phase 4: select all or specific elements in nodes
             //select tags on which specific queries will be run
             links = preLinks.Descendants("a");
             time = preTime.Descendants("time");
@@ -62,6 +73,7 @@ namespace Tier2.Logic
             price = prePriceTag.Descendants("span");
             isFixedSalary = prePriceTag.Descendants("small");
 
+            //phase 5: add selected elements to a list
             foreach(var node in isFixedSalary){
 
                 isFixedSalaryList.Add(node.InnerText);
@@ -92,6 +104,8 @@ namespace Tier2.Logic
 
                 timeList.Add(timePosted);
             }
+
+            //phase 6: unify the collected elements in one object
             // "Main" foreach where all the data are collected into a job object, then written to a List<Job>
             foreach(var node in links){
                 
@@ -104,6 +118,94 @@ namespace Tier2.Logic
                 job.Salary = priceList[foreachInteration];
                 job.isFixedSalary = isFixedSalaryList[foreachInteration];
 
+                //Check that the jobs were posted within a specified timeframe from now.
+                if(job.Time > DateTime.Now.Add(filterTime))
+                {
+                pphJobs.Add(job);
+                }
+                foreachInteration++;
+            }
+            foreachInteration = 0;
+
+            System.Console.WriteLine("HAP: Finish");
+            System.Console.WriteLine("Class SiteSearch: return: site");
+            return pphJobs;
+        }
+
+        //------------------------------------------------------ Workana query ------------------
+
+        public async Task<List<Job>> workana()
+        {
+
+            System.Console.WriteLine("Class SiteSearch: Start");
+
+            //phase 1: connect to site
+            // the site to check on
+            site = await httpClient.GetAsync("https://www.workana.com/en/jobs?category=it-programming");
+
+            //phase 2: load the site
+            siteString = await site.Content.ReadAsStringAsync();
+
+            System.Console.WriteLine("HAP: Start");
+
+            doc.LoadHtml(siteString);
+
+            //phase 3: look for specific nodes
+            //Select nodes of different locations. Needed information are separated
+            preLinks = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//h2[contains(@class, 'h2 project-title')]");
+            preTime = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//div[contains(@class, 'project-main-details hidden-xs')]");
+            preProposalCount = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//span[contains(@class, 'bids')]");
+
+            System.Console.WriteLine("HAP: precount {0}", preLinks.Count);
+
+            //phase 4: select all or specific elements in nodes
+            //select tags on which specific queries will be run
+            links = preLinks.Descendants("a");
+            time = preTime.Descendants("span");
+            proposals = preProposalCount.Nodes();
+
+            //phase 5: add selected elements to a list
+            //querying elements that are located in different nodes
+            foreach(var node in proposals){
+
+                proposalList[foreachInteration] = node.InnerText;
+                System.Console.WriteLine("proposallist added this: {0}", node.InnerText);
+                foreachInteration++;
+            }
+            // reset foreachIteration for later use
+            foreachInteration = 0;
+
+            //querying elements that are located in different nodes
+            foreach(var node in time){
+
+                System.Console.WriteLine(foreachInteration);
+                DateTime timePosted = Convert.ToDateTime(node.GetAttributeValue("title", "12/12/1900 17.37.38"));
+
+                timeList.Add(timePosted);
+                foreachInteration++;
+            }
+            // reset foreachIteration for later use
+            foreachInteration = 0;
+
+            //phase 6: unify the collected elements in one object
+            // "Main" foreach where all the data are collected into a job object, then written to a List<Job>
+            foreach(var node in links){
+                
+                Job job = new Job();
+
+                job.Title = defaultValue;
+                job.URL = defaultValue;
+                job.Time = DateTime.Now.Add(filterTime);
+                job.ProposalNum = defaultValue;
+                job.Salary = defaultValue;
+                job.isFixedSalary = defaultValue;
+
+                System.Console.WriteLine("foreach: {0}", foreachInteration);
+                job.Title = node.InnerText;
+                job.URL = node.GetAttributeValue("href", string.Empty);
+                job.Time = timeList[foreachInteration].Add(workanaTimezoneCorrection);
+                job.ProposalNum = proposalList[foreachInteration];
+                
                 //Check that the jobs were posted within a specified timeframe from now.
                 if(job.Time > DateTime.Now.Add(filterTime))
                 {
