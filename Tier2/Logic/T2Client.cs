@@ -12,9 +12,6 @@ namespace Tier2.Logic
 {
     class T2Client 
     {
-        string responseInString;
-        List<Job> deSerialized;
-        string url;
         JsonHandler jsonHandler = new JsonHandler();
         public T2Client() 
         {}    

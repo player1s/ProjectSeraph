@@ -1,0 +1,14 @@
+{
+  "ProjectFilePath": "c:\\mindenJoSHasztalan\\SecondSun\\Legacy\\Projects\\ProjectSeraph\\ProjectSeraph\\Tier3\\Tier3.csproj",
+  "TargetFramework": "netcoreapp2.1",
+  "TagHelpers": [],
+  "Configuration": {
+    "ConfigurationName": "UnsupportedRazor",
+    "LanguageVersion": "1.0",
+    "Extensions": [
+      {
+        "ExtensionName": "UnsupportedRazorExtension"
+      }
+    ]
+  }
+}

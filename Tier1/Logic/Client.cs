@@ -16,7 +16,7 @@ namespace RazorPagesMovie.Logic
         public async Task<List<Job>> GetData()
         {
             
-            url = "https://localhost:5003/api/values/";
+            url = "http://localhost:5002/api/values/";
             HttpClient client = new HttpClient();
             var result = await client.GetAsync(url).ConfigureAwait(false);
 
