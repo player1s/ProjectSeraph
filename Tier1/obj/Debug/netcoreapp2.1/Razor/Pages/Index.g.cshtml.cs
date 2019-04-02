@@ -43,7 +43,7 @@ namespace RazorPagesMovie.Pages
             WriteLiteral("\r\n<html>\r\n");
             EndContext();
             BeginContext(36, 352, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fad1baa0d7c7498c8157c9821a47ff26", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c51d6ca9d3b34bbbb19bee14352d9f1a", async() => {
                 BeginContext(42, 66, true);
                 WriteLiteral("\r\n    <p>\r\n        Get the freshest freelance jobs! \r\n    </p>\r\n\r\n");
                 EndContext();
