@@ -25,7 +25,7 @@ namespace Tier2.Logic
         string siteString;
         string defaultValue = "-";
         int foreachInteration = 0;
-        List<Job> pphJobs = new List<Job>();
+        List<Job> jobsToReturn = new List<Job>();
         List<DateTime> timeList = new List<DateTime>();
         string[] proposalList = new string[120];
         List<string> priceList = new List<string>();
@@ -42,6 +42,11 @@ namespace Tier2.Logic
         //Query website peopleperhour
         public async Task<List<Job>> pph()
         {
+            //clear arrays /lists before use
+            jobsToReturn.Clear();
+            timeList.Clear();
+            priceList.Clear();
+            priceList.Clear();
 
             System.Console.WriteLine("Class SiteSearch: Start");
 
@@ -121,7 +126,7 @@ namespace Tier2.Logic
                 //Check that the jobs were posted within a specified timeframe from now.
                 if(job.Time > DateTime.Now.Add(filterTime))
                 {
-                pphJobs.Add(job);
+                jobsToReturn.Add(job);
                 }
                 foreachInteration++;
             }
@@ -129,13 +134,15 @@ namespace Tier2.Logic
 
             System.Console.WriteLine("HAP: Finish");
             System.Console.WriteLine("Class SiteSearch: return: site");
-            return pphJobs;
+            return jobsToReturn;
         }
 
         //------------------------------------------------------ Workana query ------------------
 
         public async Task<List<Job>> workana()
         {
+            jobsToReturn.Clear();
+            timeList.Clear();
 
             System.Console.WriteLine("Class SiteSearch: Start");
 
@@ -213,7 +220,7 @@ namespace Tier2.Logic
                 //Check that the jobs were posted within a specified timeframe from now.
                 if(job.Time > DateTime.Now.Add(filterTime))
                 {
-                pphJobs.Add(job);
+                jobsToReturn.Add(job);
                 }
                 foreachInteration++;
             }
@@ -221,7 +228,7 @@ namespace Tier2.Logic
 
             System.Console.WriteLine("HAP: Finish");
             System.Console.WriteLine("Class SiteSearch: return: site");
-            return pphJobs;
+            return jobsToReturn;
         }
 
     }

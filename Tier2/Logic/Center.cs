@@ -20,13 +20,13 @@ namespace Tier2.Logic
         {
             System.Console.WriteLine("Center: Start");
 
-            //jobs.AddRange(siteSearch.pph().Result);
+            jobs.AddRange(siteSearch.pph().Result);
             jobs.AddRange(siteSearch.workana().Result);
             
             toReturn = jsonHandler.SerializeRange(jobs);
 
             // send it to tier 3
-            //t2Client.PostData(toReturn);
+            t2Client.PostData(toReturn);
 
             System.Console.WriteLine("Center: Returns: {0}", toReturn);
 
