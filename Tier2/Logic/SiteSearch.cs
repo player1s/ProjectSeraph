@@ -23,7 +23,7 @@ namespace Tier2.Logic
         IEnumerable<HtmlAgilityPack.HtmlNode> price;
         IEnumerable<HtmlAgilityPack.HtmlNode> isFixedSalary;
         string siteString;
-        string defaultValue = "Not set";
+        string defaultValue = "-";
         int foreachInteration = 0;
         List<Job> pphJobs = new List<Job>();
         List<DateTime> timeList = new List<DateTime>();
@@ -33,7 +33,7 @@ namespace Tier2.Logic
         // filtertime set to half hrs
         System.TimeSpan filterTime = new System.TimeSpan(-20, 0, -30, 0);
         //correction of timezones
-        System.TimeSpan workanaTimezoneCorrection = new System.TimeSpan(0, 6, 0, 0);
+        System.TimeSpan workanaTimezoneCorrection = new System.TimeSpan(0, 5, 0, 0);
 
         
         public SiteSearch()
@@ -153,7 +153,7 @@ namespace Tier2.Logic
             //phase 3: look for specific nodes
             //Select nodes of different locations. Needed information are separated
             preLinks = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//h2[contains(@class, 'h2 project-title')]");
-            preTime = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//div[contains(@class, 'project-main-details hidden-xs')]");
+            preTime = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//div[contains(@class, 'project-header')]");
             preProposalCount = doc.DocumentNode.SelectNodes("//div[contains(@class, 'col-sm-12 col-md-8 search-results')]//span[contains(@class, 'bids')]");
 
             System.Console.WriteLine("HAP: precount {0}", preLinks.Count);
@@ -161,25 +161,28 @@ namespace Tier2.Logic
             //phase 4: select all or specific elements in nodes
             //select tags on which specific queries will be run
             links = preLinks.Descendants("a");
-            time = preTime.Descendants("span");
+            time = preTime.Descendants("h5");
             proposals = preProposalCount.Nodes();
 
             //phase 5: add selected elements to a list
             //querying elements that are located in different nodes
             foreach(var node in proposals){
 
+                if(int.TryParse(node.InnerText, out int n))
                 proposalList[foreachInteration] = node.InnerText;
-                System.Console.WriteLine("proposallist added this: {0}", node.InnerText);
-                foreachInteration++;
+               // System.Console.WriteLine("proposallist passed on this: {0}", node.InnerText);
             }
+            foreachInteration++;
             // reset foreachIteration for later use
             foreachInteration = 0;
 
             //querying elements that are located in different nodes
             foreach(var node in time){
 
-                System.Console.WriteLine(foreachInteration);
-                DateTime timePosted = Convert.ToDateTime(node.GetAttributeValue("title", "12/12/1900 17.37.38"));
+                //System.Console.WriteLine(foreachInteration);
+                DateTime timePosted = Convert.ToDateTime(node.GetAttributeValue("title", "01/01/2000 01.01.01"));
+
+                System.Console.WriteLine("time added: " + timePosted);
 
                 timeList.Add(timePosted);
                 foreachInteration++;
@@ -195,16 +198,17 @@ namespace Tier2.Logic
 
                 job.Title = defaultValue;
                 job.URL = defaultValue;
-                job.Time = DateTime.Now.Add(filterTime);
                 job.ProposalNum = defaultValue;
                 job.Salary = defaultValue;
                 job.isFixedSalary = defaultValue;
 
-                System.Console.WriteLine("foreach: {0}", foreachInteration);
+                //System.Console.WriteLine("foreach: {0}", foreachInteration);
                 job.Title = node.InnerText;
-                job.URL = node.GetAttributeValue("href", string.Empty);
+                job.URL = "https://www.workana.com" + node.GetAttributeValue("href", string.Empty);
                 job.Time = timeList[foreachInteration].Add(workanaTimezoneCorrection);
                 job.ProposalNum = proposalList[foreachInteration];
+
+                System.Console.WriteLine("time added: " + job.Time + " with title: " + job.Title);
                 
                 //Check that the jobs were posted within a specified timeframe from now.
                 if(job.Time > DateTime.Now.Add(filterTime))

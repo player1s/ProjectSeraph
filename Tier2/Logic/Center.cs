@@ -20,7 +20,7 @@ namespace Tier2.Logic
         {
             System.Console.WriteLine("Center: Start");
 
-            jobs.AddRange(siteSearch.pph().Result);
+            //jobs.AddRange(siteSearch.pph().Result);
             jobs.AddRange(siteSearch.workana().Result);
             
             toReturn = jsonHandler.SerializeRange(jobs);
